@@ -26,8 +26,8 @@ public class YouAreEll {
         return tt.makecall("ids", name, github);
     }
 
-    private boolean MakeURLCall(String s, String get, String s1) {
-        return true;
+    public String MakeURLCall(String s, String get, String s1) {
+        return tt.makecall(s, get, s1);
     }
 
     public String get_ids() {
@@ -38,5 +38,8 @@ public class YouAreEll {
         return tt.makecall("messages", "GET", "");
     }
 
+    public String get_messages_id(String github) {
+        return tt.makecall("messages", github, "");
+    }
 
 }

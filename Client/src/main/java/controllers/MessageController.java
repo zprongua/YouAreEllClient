@@ -22,7 +22,7 @@ public class MessageController {
         String fullURL = rootURL + "/messages";
         try {
             Gson gson = new Gson();
-            ArrayList<Message> theMessages = new ArrayList<>();
+            ArrayList<Message> theMessages;
             // get all messages
             // call server, get json result Or error
             HttpRequest getRequest = HttpRequest.newBuilder().uri(URI.create(fullURL)).build();
@@ -41,7 +41,25 @@ public class MessageController {
     }
 
     public ArrayList<Message> getMessagesForId(Id Id) {
-        return null;
+        String fullURL = rootURL + "/ids/" + Id.getGithub() + "/messages";
+        try {
+            Gson gson = new Gson();
+            ArrayList<Message> messagesForId;
+            // get all messages
+            // call server, get json result Or error
+            HttpRequest getRequest = HttpRequest.newBuilder().uri(URI.create(fullURL)).build();
+
+            // result json to Message obj
+            HttpClient httpClient = HttpClient.newHttpClient();
+            HttpResponse<String> getResponse = httpClient.send(getRequest, HttpResponse.BodyHandlers.ofString());
+
+            Type messageList = new TypeToken<ArrayList<Message>>(){}.getType();
+            System.out.println(getResponse.body());
+            messagesForId = gson.fromJson(getResponse.body(), messageList);
+            return messagesForId;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public Message getMessageForSequence(String seq) {

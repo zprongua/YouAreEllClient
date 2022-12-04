@@ -69,12 +69,11 @@ public class SimpleShell {
                 // Specific Commands.
 
                 // ids
-                if (list.contains("ids")) {
+                if (list.equals("ids")) {
                     String results = urll.get_ids();
                     SimpleShell.prettyPrint(results);
                     continue;
                 }
-
                 if (list.contains("ids") && list.size() > 1) {
                     String results = urll.postId(commands[1], commands[2]);
                     SimpleShell.prettyPrint(results + "received.");
@@ -82,11 +81,17 @@ public class SimpleShell {
                 }
 
                 // messages
-                if (list.contains("messages")) {
+                if (list.contains("messages") && list.size() > 1) {
+                    String results = urll.get_messages_id(commands[1]);
+                    SimpleShell.prettyPrint(results);
+                    continue;
+                }
+                else if (list.contains("messages")) {
                     String results = urll.get_messages();
                     SimpleShell.prettyPrint(results);
                     continue;
                 }
+
                 // you need to add a bunch more.
 
                 //!! command returns the last command in history
