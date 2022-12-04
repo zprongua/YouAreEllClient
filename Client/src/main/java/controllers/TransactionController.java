@@ -34,7 +34,9 @@ public class TransactionController {
         else if (s.equals("ids")) {
             return postId(get, s1);
         }
-        if (s.equalsIgnoreCase("messages") && get.equalsIgnoreCase("GET"))
+        if (s.equalsIgnoreCase("messages") && get.equalsIgnoreCase("GET")) {
+            return null;
+        }
         return null;
     }
 }
