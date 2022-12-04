@@ -17,16 +17,13 @@ public class YouAreEll {
 
     public static void main(String[] args) {
         // hmm: is this Dependency Injection?
-        YouAreEll urlhandler = new YouAreEll(
-            new TransactionController(
-                new MessageController(), new IdController()
-        ));
+        YouAreEll urlhandler = new YouAreEll(new TransactionController(new MessageController(), new IdController()));
         System.out.println(urlhandler.MakeURLCall("/ids", "GET", ""));
         System.out.println(urlhandler.MakeURLCall("/messages", "GET", ""));
     }
 
     public String postId(String name, String github) {
-        return tt.postId(name, github);
+        return tt.makecall("ids", name, github);
     }
 
     private boolean MakeURLCall(String s, String get, String s1) {
@@ -34,11 +31,11 @@ public class YouAreEll {
     }
 
     public String get_ids() {
-        return tt.makecall("/ids", "GET", "");
+        return tt.makecall("ids", "GET", "");
     }
 
-    public boolean get_messages() {
-        return MakeURLCall("/messages", "GET", "");
+    public String get_messages() {
+        return tt.makecall("messages", "GET", "");
     }
 
 

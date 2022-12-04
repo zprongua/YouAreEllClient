@@ -15,15 +15,26 @@ public class TransactionController {
     }
 
     public List<Id> getIds() {
-        return null;
+        return idCtrl.getIds();
     }
     public String postId(String name, String githubName) {
         Id tid = new Id(name, githubName);
         tid = idCtrl.postId(tid);
-        return ("\nId registered.");
+        return tid.toString();
     }
 
     public String makecall(String s, String get, String s1) {
+        if (s.equals("ids") && get.equals("GET")) {
+            StringBuilder sb = new StringBuilder();
+            for (Id k : getIds()) {
+                sb.append(k + "\n");
+            }
+            return sb.toString();
+        }
+        else if (s.equals("ids")) {
+            return postId(get, s1);
+        }
+        if (s.equalsIgnoreCase("messages") && get.equalsIgnoreCase("GET"))
         return null;
     }
 }

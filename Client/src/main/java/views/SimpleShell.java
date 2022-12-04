@@ -17,7 +17,7 @@ public class SimpleShell {
 
     public static void prettyPrint(String output) {
         // yep, make an effort to format things nicely, eh?
-        System.out.println(output);
+        System.out.println("\n" + output);
     }
     public static void main(String[] args) throws java.io.IOException {
 
@@ -33,7 +33,7 @@ public class SimpleShell {
         //we break out with <ctrl c>
         while (true) {
             //read what the user enters
-            System.out.println("cmd? ");
+            System.out.print("cmd? ");
             commandLine = console.readLine();
 
             //input parsed into array of strings(command and arguments)
@@ -64,23 +64,26 @@ public class SimpleShell {
                     continue;
                 }
 
-                if (list.contains("ids") && list.size() > 1) {
-                    String results = urll.postId(commands[1], commands[2]);
-                    SimpleShell.prettyPrint(results);
-                }
+
 
                 // Specific Commands.
 
                 // ids
                 if (list.contains("ids")) {
-                    String results = ""; //webber.get_ids();
+                    String results = urll.get_ids();
                     SimpleShell.prettyPrint(results);
+                    continue;
+                }
+
+                if (list.contains("ids") && list.size() > 1) {
+                    String results = urll.postId(commands[1], commands[2]);
+                    SimpleShell.prettyPrint(results + "received.");
                     continue;
                 }
 
                 // messages
                 if (list.contains("messages")) {
-                    String results = ""; //webber.get_messages();
+                    String results = urll.get_messages();
                     SimpleShell.prettyPrint(results);
                     continue;
                 }
