@@ -11,7 +11,7 @@ import controllers.IdController;
 import controllers.MessageController;
 import youareell.YouAreEll;
 
-// Simple Shell is a Console view for youareell.YouAreEll.
+// Simple Shell is a Console view for you are ell.YouAreEll.
 public class SimpleShell {
 
 
@@ -28,7 +28,7 @@ public class SimpleShell {
                 (new InputStreamReader(System.in));
 
         ProcessBuilder pb = new ProcessBuilder();
-        List<String> history = new ArrayList<String>();
+        List<String> history = new ArrayList();
         int index = 0;
         //we break out with <ctrl c>
         while (true) {
@@ -38,7 +38,7 @@ public class SimpleShell {
 
             //input parsed into array of strings(command and arguments)
             String[] commands = commandLine.split(" ");
-            List<String> list = new ArrayList<String>();
+            List<String> list = new ArrayList();
 
             //if the user entered a return, just loop again
             if (commandLine.equals(""))
@@ -56,7 +56,7 @@ public class SimpleShell {
             }
             System.out.print(list); //***check to see if list was added correctly***
             history.addAll(list);
-            try {
+//            try {
                 //display history of shell with index
                 if (list.get(list.size() - 1).equals("history")) {
                     for (String s : history)
@@ -64,18 +64,23 @@ public class SimpleShell {
                     continue;
                 }
 
+                if (list.contains("ids") && list.size() > 1) {
+                    String results = urll.postId(commands[1], commands[2]);
+                    SimpleShell.prettyPrint(results);
+                }
+
                 // Specific Commands.
 
                 // ids
                 if (list.contains("ids")) {
-                    String results = webber.get_ids();
+                    String results = ""; //webber.get_ids();
                     SimpleShell.prettyPrint(results);
                     continue;
                 }
 
                 // messages
                 if (list.contains("messages")) {
-                    String results = webber.get_messages();
+                    String results = ""; //webber.get_messages();
                     SimpleShell.prettyPrint(results);
                     continue;
                 }
@@ -95,26 +100,27 @@ public class SimpleShell {
                 }
 
                 // // wait, wait, what curiousness is this?
-                // Process process = pb.start();
+                 Process process = pb.start();
 
                 // //obtain the input stream
-                // InputStream is = process.getInputStream();
-                // InputStreamReader isr = new InputStreamReader(is);
-                // BufferedReader br = new BufferedReader(isr);
+//                 InputStream is = process.getInputStream();
+//                 InputStreamReader isr = new InputStreamReader(is);
+//                 BufferedReader br = new BufferedReader(isr);
 
                 // //read output of the process
-                // String line;
-                // while ((line = br.readLine()) != null)
-                //     System.out.println(line);
-                // br.close();
+//                 String line;
+//                 while ((line = br.readLine()) != null)
+//                     System.out.println(line);
+//                 br.close();
 
 
-            }
+//            }
 
             //catch ioexception, output appropriate message, resume waiting for input
-            catch (IOException e) {
-                System.out.println("Input Error, Please try again!");
-            }
+//            catch (IOException e) {
+//                System.out.println("Input Error, Please try again!");
+//                throw e;
+//            }
             // So what, do you suppose, is the meaning of this comment?
             /** The steps are:
              * 1. parse the input to obtain the command and any parameters

@@ -14,12 +14,15 @@ public class MessageController {
     public ArrayList<Message> getMessages() {
         return null;
     }
+
     public ArrayList<Message> getMessagesForId(Id Id) {
         return null;
     }
+
     public Message getMessageForSequence(String seq) {
         return null;
     }
+
     public ArrayList<Message> getMessagesFromFriend(Id myId, Id friendId) {
         return null;
     }

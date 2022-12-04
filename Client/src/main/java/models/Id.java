@@ -2,21 +2,30 @@ package models;
 
 /* 
  * POJO for an Id object
+ *  {
+        "userid": "-", // gets filled w id
+        "name": "Kris",
+        "github": "xt0fer"
+    }
  */
 public class Id {
-    private String uid = "";
+    private String userid = "-";
     private String name = "";
     private String github = "";
 
-    public Id (String name, String githubId) {}
-
-    public String getUid() {
-        return uid;
+    public Id (String name, String githubId) {
+        this.userid = "-";
+        this.name = name;
+        this.github = githubId;
     }
 
-//    public void setUid(String uid) {
-//        this.uid = uid;
-//    }
+    public String getUid() {
+        return userid;
+    }
+
+    public void setUid(String uid) {
+        this.userid = uid;
+    }
 
     public String getName() {
         return name;
