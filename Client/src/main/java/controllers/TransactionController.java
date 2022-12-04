@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Id;
+import models.Message;
 
 import java.util.List;
 
@@ -23,6 +24,10 @@ public class TransactionController {
         return tid.toString();
     }
 
+    public List<Message> getMessages() {
+        return msgCtrl.getMessages();
+    }
+
     public String makecall(String s, String get, String s1) {
         if (s.equals("ids") && get.equals("GET")) {
             StringBuilder sb = new StringBuilder();
@@ -34,8 +39,12 @@ public class TransactionController {
         else if (s.equals("ids")) {
             return postId(get, s1);
         }
-        if (s.equalsIgnoreCase("messages") && get.equalsIgnoreCase("GET")) {
-            return null;
+        else if (s.equalsIgnoreCase("messages") && get.equalsIgnoreCase("GET")) {
+            StringBuilder sb = new StringBuilder();
+            for (Message m : getMessages()) {
+                sb.append(m);
+            }
+            return sb.toString();
         }
         return null;
     }

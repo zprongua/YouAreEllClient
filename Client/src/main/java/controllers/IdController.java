@@ -26,10 +26,10 @@ public class IdController {
 
             // result json to Id obj
             HttpClient httpClient = HttpClient.newHttpClient();
-            HttpResponse<String> postResponse = httpClient.send(getRequest, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> getResponse = httpClient.send(getRequest, HttpResponse.BodyHandlers.ofString());
 
             Type idsList = new TypeToken<ArrayList<Id>>(){}.getType();
-            theIds = gson.fromJson(postResponse.body(), idsList);
+            theIds = gson.fromJson(getResponse.body(), idsList);
             return theIds;
         } catch (Exception e) {
             System.out.println(e);
