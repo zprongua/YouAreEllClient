@@ -8,6 +8,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import models.Id;
@@ -16,10 +18,10 @@ public class IdController {
     String fullURL = "http://zipcode.rocks:8085/ids";
     private HashMap<String, Id> allIds;
 
-    public ArrayList<Id> getIds() {
+    public List<Id> getIds() {
         try {
             Gson gson = new Gson();
-            ArrayList<Id> theIds = new ArrayList<>();
+            ArrayList<Id> theIds;
             // get all ids
             // call server, get json result Or error
             HttpRequest getRequest = HttpRequest.newBuilder().uri(URI.create(fullURL)).build();

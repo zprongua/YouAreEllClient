@@ -69,7 +69,7 @@ public class SimpleShell {
                 // Specific Commands.
 
                 // ids
-                if (list.equals("ids")) {
+                if (list.contains("ids")) {
                     String results = urll.get_ids();
                     SimpleShell.prettyPrint(results);
                     continue;
@@ -81,15 +81,49 @@ public class SimpleShell {
                 }
 
                 // messages
-                if (list.contains("messages") && list.size() > 1) {
+                if (list.contains("messages") && list.size() == 2) {
                     String results = urll.get_messages_id(commands[1]);
                     SimpleShell.prettyPrint(results);
                     continue;
                 }
-                else if (list.contains("messages")) {
+                if (list.contains("send") && list.size() == 3) {
+                    String results = urll.post_message(commands[1], commands[2]);
+                    SimpleShell.prettyPrint(results);
+                }
+                if (list.contains("send") && list.size() > 3) {
+                    String message = "";
+                    String results;
+                    if (commands[commands.length-2].equals ("to")) {
+                        for (int i = 2; i < commands.length - 2; i++) {
+                            message += commands[i] + " ";
+                        }
+                        if (message.lastIndexOf(" ") == message.length() - 1)
+                            message = message.substring(0, message.length() - 1);
+                        results = urll.post_message_id(commands[1], message, commands[commands.length - 1]);
+                    }
+                    else {
+                        for (int i = 2; i < commands.length; i++) {
+                            message += commands[i] + " ";
+                        }
+                        if (message.lastIndexOf(" ") == message.length() - 1)
+                            message = message.substring(0, message.length() - 1);
+                        results = urll.post_message_id(commands[1], message, "");
+                    }
+                    SimpleShell.prettyPrint(results);
+                }
+                if (list.contains("messages") && list.size() == 1) {
                     String results = urll.get_messages();
                     SimpleShell.prettyPrint(results);
                     continue;
+                }
+
+                if (list.contains("get") && list.get(2).equals("from")) {
+                    String results = urll.get_messages_from(commands[1], commands[3]);
+                    SimpleShell.prettyPrint(results);
+                }
+                if (list.contains("get") && list.get(1).equals("message")) {
+                    String results = urll.get_message_seq(commands[2], commands[commands.length-1]);
+                    SimpleShell.prettyPrint(results);
                 }
 
                 // you need to add a bunch more.
@@ -108,7 +142,7 @@ public class SimpleShell {
                 }
 
                 // // wait, wait, what curiousness is this?
-                 Process process = pb.start();
+//                 Process process = pb.start();
 
                 // //obtain the input stream
 //                 InputStream is = process.getInputStream();

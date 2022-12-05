@@ -19,6 +19,10 @@ public class Id {
         this.github = githubId;
     }
 
+    public Id (String githubId) {
+        this.github = githubId;
+    }
+
     public Id () {
     }
 

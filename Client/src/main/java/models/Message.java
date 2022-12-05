@@ -1,6 +1,8 @@
 package models;
 
-/* 
+import java.time.LocalDateTime;
+
+/*
  * POJO for an Message object
  *
  *   {
@@ -15,11 +17,11 @@ package models;
  */
 public class Message implements Comparable {
 
-    private String message = "";
-    private String toid = "";
+    private String sequence = "-";
+    private String timestamp = (LocalDateTime.now()+"Z");
     private String fromid = "";
-    private String timestamp = "";
-    private String seqId = "";
+    private String toid = "";
+    private String message = "";
 
     public Message (String message, String fromid, String toid) {
         this.message = message;
@@ -39,7 +41,7 @@ public class Message implements Comparable {
     }
 
     public int compareTo(Object o) {
-        return this.seqId.compareTo(((Message) o).getSeqId());
+        return this.sequence.compareTo(((Message) o).getSequence());
     }
 
     public String getMessage() {
@@ -70,7 +72,7 @@ public class Message implements Comparable {
         return timestamp;
     }
 
-    public String getSeqId() {
-        return seqId;
+    public String getSequence() {
+        return sequence;
     }
 }
